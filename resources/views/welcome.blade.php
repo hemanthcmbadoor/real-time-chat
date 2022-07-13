@@ -21,12 +21,7 @@
         </header>
 
         <main class="msger-chat">
-            
-        <div id="messages"></div>
-
-
-            
-            
+            <div id="messages"></div>
         </main>
 
         <form class="msger-inputarea">

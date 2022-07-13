@@ -5298,15 +5298,21 @@ message_form.addEventListener('submit', function (e) {
   };
   axios(options);
 });
-var count = 0;
+var user = [];
+var index = 0;
 window.Echo.channel('chat').listen('.message', function (e) {
   message_input.value = '';
-  count++;
 
-  if (count % 2) {
-    message_el.innerHTML += "<div class='msg left-msg'>" + "<div class='msg-img' style='background-image: url(https://cdn-icons-png.flaticon.com/512/147/147140.png)'></div>" + "<div class='msg-bubble'>" + "<div class='msg-info'>" + "<div class='msg-info-name'>" + e.username + "</div>" + "<div class='msg-info-time'>" + e.time + "</div>" + "</div>" + "<div class='msg-text'>" + e.message + "</div>" + "</div>" + "</div>";
-  } else {
+  if (!user.includes(e.username)) {
+    user.push(e.username);
+  }
+
+  index = user.indexOf(e.username);
+
+  if (index % 2) {
     message_el.innerHTML += "<div class='msg right-msg'>" + "<div class='msg-img' style='background-image: url(https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg)'></div>" + "<div class='msg-bubble'>" + "<div class='msg-info'>" + "<div class='msg-info-name'>" + e.username + "</div>" + "<div class='msg-info-time'>" + e.username + "</div>" + "</div>" + "<div class='msg-text'>" + e.message + "</div>" + "</div>" + "</div>";
+  } else {
+    message_el.innerHTML += "<div class='msg left-msg'>" + "<div class='msg-img' style='background-image: url(https://cdn-icons-png.flaticon.com/512/147/147140.png)'></div>" + "<div class='msg-bubble'>" + "<div class='msg-info'>" + "<div class='msg-info-name'>" + e.username + "</div>" + "<div class='msg-info-time'>" + e.time + "</div>" + "</div>" + "<div class='msg-text'>" + e.message + "</div>" + "</div>" + "</div>";
   } // message_el.innerHTML +=
   //                         "<div class='direct-chat-msg shadow p-3 mb-5 bg-white rounded'>" +
   //                             "<div class='direct-chat-info clearfix'>"+
